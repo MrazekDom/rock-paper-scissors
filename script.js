@@ -1,6 +1,8 @@
+
+
 function getComputerChoice(){
     let computerSelection = Math.floor(Math.random()*(3-1+1)+1);
-    if (choice == 1){
+    if (computerSelection == 1){
         return "Rock"
     }
     else if (computerSelection == 2){
@@ -12,53 +14,66 @@ function getComputerChoice(){
 }
 
 function getPlayerChoice(){
-    console.log("welcome to a game of 'Rock-Paper-Scissors!")
-    let playerSelection = prompt("Please, select: 1 - Rock , 2 - Paper, 3 - Scissors")
-    if(playerInput == 1){
+    let playerSelection = prompt("welcome to a game of 'Rock-Paper-Scissors! \n Please, select: 1 - Rock , 2 - Paper, 3 - Scissors")
+    if(playerSelection == 1){
         return "Rock"
     }
     else if (playerSelection == 2){
         return "Paper"
     }
-    else if (playerInput ==3){
+    else if (playerSelection ==3){
         return "Scissors"
     }
 }
 
 function playRound(playerSelection,computerSelection){
-    if(playerSelection == "Rock" && computerSelection == "Scissors"){
+    if(playerSelection == computerSelection){
+        return 1;
+    }
+    else if ((playerSelection == "Rock" && computerSelection == "Scissors") || (playerSelection == "Paper" && computerSelection == "Rock") || (playerSelection == "Scissors" && computerSelection == "Paper")){
         return 2
     }
-    else if (playerSelection == "Rock" && computerSelection == "Rock"){
-        return 1
+    else if ((playerSelection == "Rock" && computerSelection == "Paper") || (playerSelection == "Paper" && computerSelection == "Scissors") || (playerSelection == "Scissors" && computerSelection == "Rock")){
+    return 0
+    
     }
-    else if(playerSelection=="Rock"&& computerSelection=="Paper"){
-        return 0
-    }
-    else if(playerSelection == "Scissors" && computerSelection == "Paper"){
-        return 2
-    }
-    else if (playerSelection == "Scissors" && computerSelection == "Scissors"){
-        return 1
-    }
-    else if(playerSelection=="Scissors"&& computerSelection=="Rock"){
-        return 0
-    }
-    else if(playerSelection == "Paper" && computerSelection == "Rock"){
-        return 2
-    }
-    else if (playerSelection == "Paper" && computerSelection == "Paper"){
-        return 1
-    }
-    else if(playerSelection=="Paper"&& computerSelection=="Scissors"){
-        return 0
-    }
-
-
-
 }
 
-let playerSelection = getPlayerChoice();
-let computerSelection = getComputerChoice();
-console.log(playRound(playerSelection,computerSelection))
+
+function game(){
+    let computerScore =0;
+    let playerScore =0;
+for(let i =1; i<=5;i++){
+    let playerSelection = getPlayerChoice();
+    let computerSelection = getComputerChoice();
+    let result = playRound(playerSelection,computerSelection)
+    if(result==2){
+        console.log("You won, " + playerSelection + " beats " + computerSelection + " you get one point!")
+        playerScore++;
+        console.log("Your score: " + playerScore + " Computer score: " + computerScore)
+    }
+    else if(result==1){
+        console.log("It's a draw!")
+        console.log("Your score: " + playerScore + " Computer score: " + computerScore)
+    }
+    else if(result==0){
+        console.log("You lost! " + computerSelection + " beats " + playerSelection + " Computer gets one point!")
+        computerScore++;
+        console.log("Your score: " + playerScore + " Computer score: " + computerScore)
+    }
+}
+if(playerScore>computerScore){
+    console.log("Congrats! You have won!")
+    console.log("Final score - Computer score: " + computerScore + " Player score: " + playerScore)
+}
+else if (playerScore == computerScore){
+    console.log("It is a draw!")
+    console.log("Final score: - Computer score: " + computerScore + " Player score: " + playerScore)
+}
+else if (playerScore<computerScore){
+    console.log("You have lost!")
+    console.log("Final score: - Computer score: " + computerScore + " Player score: " + playerScore)
+}
+
+}
 
