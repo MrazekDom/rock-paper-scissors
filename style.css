@@ -1,0 +1,17 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    height: 100vh;
+    margin: 0;
+}
+
+.buttons {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+  }
+  

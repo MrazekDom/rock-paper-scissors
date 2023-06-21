@@ -38,7 +38,9 @@ function playRound(playerSelection,computerSelection){
     
     }
 }
-
+const buttonRock = document.querySelector('btnRock',playRound);
+const buttonPaper = document.querySelector('btnPaper',playRound);
+const buttonScissors = document.querySelector('btnScissors',playRound);
 
 function game(){
     let computerScore =0;
