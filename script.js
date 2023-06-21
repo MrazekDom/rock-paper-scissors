@@ -1,4 +1,29 @@
+const rock = document.getElementById("btnRock");
+const paper = document.getElementById("btnPaper");
+const scissors = document.getElementById("btnScissors");
 
+const message = document.getElementById("message");
+const count = document.getElementById("count");
+
+let playerSelection;
+
+
+let computerScore =0;
+let playerScore =0;
+let numberOfRounds=0;
+
+rock.addEventListener('click',function(){
+    playerSelection ="Rock"
+    playRound(playerSelection);
+});
+paper.addEventListener('click',function(){
+    playerSelection="Paper"
+    playRound(playerSelection);
+});
+scissors.addEventListener('click',function(){
+    playerSelection="Scissors"
+    playRound(playerSelection);
+})
 
 function getComputerChoice(){
     let computerSelection = Math.floor(Math.random()*(3-1+1)+1);
@@ -13,69 +38,46 @@ function getComputerChoice(){
     }
 }
 
-function getPlayerChoice(){
-    let playerSelection = prompt("welcome to a game of 'Rock-Paper-Scissors! \n Please, select: 1 - Rock , 2 - Paper, 3 - Scissors")
-    if(playerSelection == 1){
-        return "Rock"
+function playRound(playerSelection){
+    computerSelection = getComputerChoice();
+    let text;
+    let points;
+    if(numberOfRounds<5){
+        if(playerSelection == computerSelection){
+            text ="It's a draw!";
+            points="Your score: " + playerScore + " Computer score: " + computerScore;
+        }
+        else if ((playerSelection == "Rock" && computerSelection == "Scissors") || (playerSelection == "Paper" && computerSelection == "Rock") || (playerSelection == "Scissors" && computerSelection == "Paper")){
+            text="You won, " + playerSelection + " beats " + computerSelection + " you get one point!";
+            playerScore++;
+            points="Your score: " + playerScore + " Computer score: " + computerScore;
+        }
+        else if ((playerSelection == "Rock" && computerSelection == "Paper") || (playerSelection == "Paper" && computerSelection == "Scissors") || (playerSelection == "Scissors" && computerSelection == "Rock")){
+            text="You lost! " + computerSelection + " beats " + playerSelection + " Computer gets one point!";
+            computerScore++;
+            points="Your score: " + playerScore + " Computer score: " + computerScore;
+        
+        }
+        message.textContent=text;
+        count.textContent=points;
+        numberOfRounds++;
     }
-    else if (playerSelection == 2){
-        return "Paper"
-    }
-    else if (playerSelection ==3){
-        return "Scissors"
-    }
-}
-
-function playRound(playerSelection,computerSelection){
-    if(playerSelection == computerSelection){
-        return 1;
-    }
-    else if ((playerSelection == "Rock" && computerSelection == "Scissors") || (playerSelection == "Paper" && computerSelection == "Rock") || (playerSelection == "Scissors" && computerSelection == "Paper")){
-        return 2
-    }
-    else if ((playerSelection == "Rock" && computerSelection == "Paper") || (playerSelection == "Paper" && computerSelection == "Scissors") || (playerSelection == "Scissors" && computerSelection == "Rock")){
-    return 0
     
+    else{
+        if(playerScore>computerScore){
+            text="Congrats! You have won!";
+            points="Final score - Computer score: " + computerScore + " Player score: " + playerScore;
+        }
+        else if (playerScore == computerScore){
+            text="It is a draw!";
+            points="Final score: - Computer score: " + computerScore + " Player score: " + playerScore;
+        }
+        else if (playerScore<computerScore){
+            text="You have lost!";
+            points="Final score: - Computer score: " + computerScore + " Player score: " + playerScore;
+        }
+        message.textContent=text;
+        count.textContent=points;
     }
+    
 }
-const buttonRock = document.querySelector('btnRock',playRound);
-const buttonPaper = document.querySelector('btnPaper',playRound);
-const buttonScissors = document.querySelector('btnScissors',playRound);
-
-function game(){
-    let computerScore =0;
-    let playerScore =0;
-for(let i =1; i<=5;i++){
-    let playerSelection = getPlayerChoice();
-    let computerSelection = getComputerChoice();
-    let result = playRound(playerSelection,computerSelection)
-    if(result==2){
-        console.log("You won, " + playerSelection + " beats " + computerSelection + " you get one point!")
-        playerScore++;
-        console.log("Your score: " + playerScore + " Computer score: " + computerScore)
-    }
-    else if(result==1){
-        console.log("It's a draw!")
-        console.log("Your score: " + playerScore + " Computer score: " + computerScore)
-    }
-    else if(result==0){
-        console.log("You lost! " + computerSelection + " beats " + playerSelection + " Computer gets one point!")
-        computerScore++;
-        console.log("Your score: " + playerScore + " Computer score: " + computerScore)
-    }
-}
-if(playerScore>computerScore){
-    console.log("Congrats! You have won!")
-    console.log("Final score - Computer score: " + computerScore + " Player score: " + playerScore)
-}
-else if (playerScore == computerScore){
-    console.log("It is a draw!")
-    console.log("Final score: - Computer score: " + computerScore + " Player score: " + playerScore)
-}
-else if (playerScore<computerScore){
-    console.log("You have lost!")
-    console.log("Final score: - Computer score: " + computerScore + " Player score: " + playerScore)
-}
-
-}
-
