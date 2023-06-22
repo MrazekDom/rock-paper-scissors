@@ -1,32 +1,42 @@
 const rock = document.getElementById("btnRock");
 const paper = document.getElementById("btnPaper");
 const scissors = document.getElementById("btnScissors");
-
 const message = document.getElementById("message");
 const count = document.getElementById("count");
 
+
 let playerSelection;
-
-
 let computerScore =0;
 let playerScore =0;
 let numberOfRounds=0;
 
+ 
+
 rock.addEventListener('click',function(){
     playerSelection ="Rock"
+    this.classList.add("playing")
     playRound(playerSelection);
 });
 paper.addEventListener('click',function(){
     playerSelection="Paper"
+    this.classList.add("playing")
     playRound(playerSelection);
 });
 scissors.addEventListener('click',function(){
     playerSelection="Scissors"
+    this.classList.add("playing")
     playRound(playerSelection);
 })
 
+function removeTransition(e){
+    if(e.propertyName !== 'transform') return;
+    this.classList.remove("playing");
+  }
+const buttons = document.querySelectorAll("button")
+buttons.forEach(button=> button.addEventListener('transitionend',removeTransition));
+
 function getComputerChoice(){
-    let computerSelection = Math.floor(Math.random()*(3-1+1)+1);
+    let computerSelection = Math.floor(Math.random()*(3)+1);
     if (computerSelection == 1){
         return "Rock"
     }

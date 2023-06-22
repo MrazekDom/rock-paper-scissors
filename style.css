@@ -6,12 +6,30 @@
     flex-wrap: wrap;
     height: 100vh;
     margin: 0;
+    background-color: rgba(17, 16, 16, 0.404);
 }
 
 .buttons {
     display: flex;
-
     align-items: center;
     justify-content: space-between;
+    
+  }
+
+  .buttons>button{
+    padding: 1em;
+    transition: all .07s ease;
+  }
+
+  .main {
+    padding: 2em;
+    border: solid 3px black;
+    border-radius: 5%;
+  }
+
+  .playing {
+    transform: scale(1.1);
+    border-color: #ffc600;
+    box-shadow: 0 0 1rem #ffc600;
   }
   
